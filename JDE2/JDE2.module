@@ -1,0 +1,16 @@
+﻿{
+    "IsEnabled": true,
+    "Name": "JDE2",
+    "Version": "1.0.0.0",
+    "Assemblies":
+    [
+        {
+            "Path": "/JDE2.dll",
+            "Role": "Both_Optional"
+        },
+        {
+            "Path": "/0Harmony.dll",
+            "Role": "Both_Optional"
+        }
+    ]
+}
