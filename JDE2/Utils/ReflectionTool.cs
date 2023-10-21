@@ -1,4 +1,4 @@
-﻿using Rocket.Core.Utils;
+﻿using JDE2.Managers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JDE2.Tools
+namespace JDE2.Utils
 {
     public static class ReflectionTool
     {
@@ -20,6 +20,7 @@ namespace JDE2.Tools
                 allTypes.AddRange(GetTypesFromInterface(assembly, interfaceName));
             }
             return allTypes;
+            
         }
 
         public static List<Type> GetTypesFromInterface(Assembly assembly, string interfaceName)

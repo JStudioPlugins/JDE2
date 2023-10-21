@@ -1,5 +1,5 @@
 ﻿using JDE2.SituationDependent;
-using JDE2.Tools;
+using JDE2.Utils;
 using SDG.Unturned;
 using System;
 using System.Collections.Generic;
@@ -14,16 +14,16 @@ namespace JDE2.Managers
     {
         public static CommandsManager Instance;
 
-        public CommandsManager() 
+        public CommandsManager()
         {
             Instance = this;
 
-            UnturnedLog.info("LOADING ISingleplayerCommands");
+            LoggingManager.Log("LOADING ISingleplayerCommands");
             var types = ReflectionTool.GetTypesFromInterface(Main.Instance.Assembly, "ISingleplayerCommand");
             foreach (Type type in types)
             {
                 Commander.register((Command)Activator.CreateInstance(type));
-                UnturnedLog.info($"REGISTERED {type.FullName}");
+                LoggingManager.Log($"REGISTERED COMMAND {{cyan}}{type.FullName}{{_}}");
             }
         }
     }

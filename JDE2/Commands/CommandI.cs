@@ -1,7 +1,4 @@
-﻿using Rocket.API;
-using Rocket.Unturned.Chat;
-using Rocket.Unturned;
-using SDG.Unturned;
+﻿using SDG.Unturned;
 using Steamworks;
 using System;
 using System.Collections.Generic;

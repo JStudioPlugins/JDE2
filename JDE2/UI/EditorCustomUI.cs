@@ -13,6 +13,8 @@ namespace JDE2.UI
     {
         public SleekFullscreenBox Container { get; private set; }
 
+        public virtual ISleekElement ParentElement { get; set; }
+
         public bool Active { get; private set; }
 
         public abstract int ContainerOffsetX { get; }
@@ -60,14 +62,21 @@ namespace JDE2.UI
         public EditorCustomUI()
         {
             Container = new SleekFullscreenBox();
-            Container.positionOffset_X = ContainerOffsetX;
-            Container.positionOffset_Y = ContainerOffsetY;
-            Container.positionScale_X = ContainerPositionScaleX;
-            Container.sizeOffset_X = ContainerSizeOffsetX;
-            Container.sizeOffset_Y = ContainerOffsetY;
-            Container.sizeScale_X = ContainerSizeScaleX;
-            Container.sizeScale_Y = ContainerSizeScaleY;
-            EditorUI.window.AddChild(Container);
+            Container.PositionOffset_X = ContainerOffsetX;
+            Container.PositionOffset_Y = ContainerOffsetY;
+            Container.PositionScale_X = ContainerPositionScaleX;
+            Container.SizeOffset_X = ContainerSizeOffsetX;
+            Container.SizeOffset_Y = ContainerOffsetY;
+            Container.SizeScale_X = ContainerSizeScaleX;
+            Container.SizeScale_Y = ContainerSizeScaleY;
+            if (ParentElement == null)
+            {
+                EditorUI.window.AddChild(Container);
+            }
+            else
+            {
+                ParentElement.AddChild(Container);
+            }
             Active = false;
         }
     }

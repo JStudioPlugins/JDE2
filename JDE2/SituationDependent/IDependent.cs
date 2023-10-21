@@ -8,6 +8,6 @@ namespace JDE2.SituationDependent
 {
     public interface IDependent
     {
-        
+
     }
 }

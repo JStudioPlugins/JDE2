@@ -48,18 +48,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Rocket.API, Version=4.9.3.5, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\Rocket.API.dll</HintPath>
-    </Reference>
-    <Reference Include="Rocket.Core, Version=4.9.3.5, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\Rocket.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Rocket.Unturned, Version=4.9.3.14, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\Rocket.Unturned.dll</HintPath>
-    </Reference>
     <Reference Include="SDG.Glazier.Runtime, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\SDG.Glazier.Runtime.dll</HintPath>
@@ -84,6 +72,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="SystemEx">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Unturned\Unturned_Data\Managed\SystemEx.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\Unity.TextMeshPro.dll</HintPath>
@@ -152,12 +143,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEx">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Unturned\Unturned_Data\Managed\UnityEx.dll</HintPath>
+    </Reference>
     <Reference Include="UnturnedDat, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\UnturnedDat.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\CommandHeal.cs" />
     <Compile Include="Commands\CommandI.cs" />
     <Compile Include="Commands\CommandMore.cs" />
     <Compile Include="Commands\CommandV.cs" />
@@ -165,17 +160,28 @@
     <Compile Include="Config.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Managers\AssetLoadingManager.cs" />
+    <Compile Include="Managers\AutoSaveManager.cs" />
     <Compile Include="Managers\CommandsManager.cs" />
+    <Compile Include="Managers\ConsoleManager.cs" />
+    <Compile Include="Managers\DependentManager.cs" />
+    <Compile Include="Managers\LoggingManager.cs" />
     <Compile Include="Managers\OnUpdateManager.cs" />
     <Compile Include="Managers\PatchManager.cs" />
+    <Compile Include="Managers\PluginManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SituationDependent\IConsoleDependent.cs" />
     <Compile Include="SituationDependent\IDependent.cs" />
     <Compile Include="SituationDependent\IEditorDependent.cs" />
     <Compile Include="SituationDependent\IJDEDependent.cs" />
+    <Compile Include="SituationDependent\IMenuDependent.cs" />
     <Compile Include="SituationDependent\ISingleplayerDependent.cs" />
-    <Compile Include="Tools\ReflectionTool.cs" />
+    <Compile Include="Utils\DispatcherTool.cs" />
+    <Compile Include="Utils\EditorHeightmapUITool_GETTO.cs" />
+    <Compile Include="Utils\ReflectionTool.cs" />
     <Compile Include="UI\EditorCustomObjectUI.cs" />
+    <Compile Include="UI\EditorCustomTerrainUI_GETTO.cs" />
     <Compile Include="UI\EditorCustomUI.cs" />
+    <Compile Include="UI\EditorCustomUIAutoSpacer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="lib\0Harmony.dll" />
@@ -209,6 +215,9 @@
     <Content Include="lib\UnturnedDat.dll" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="JDE2.module">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

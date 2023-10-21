@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JDE2.SituationDependent
 {
-    public interface IEditorDependent : IDependent
+    public interface IConsoleDependent : IDependent
     {
     }
 }

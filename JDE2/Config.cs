@@ -74,11 +74,23 @@ namespace JDE2
     {
         public AssetsConfig AssetsConfig { get; set; }
         public CommandsConfig CommandsConfig { get; set; }
+        public EditorConfig EditorConfig { get; set; }
+        public PluginConfig PluginConfig { get; set; }
+        public DeveloperConfig DeveloperConfig { get; set; }
+        
 
         public void LoadDefaults()
         {
-            AssetsConfig = new() { LoadMaps = true, LoadSandbox = true };
+            AssetsConfig = new()
+            {
+                LoadMaps = true,
+                LoadSandbox = true,
+                LoadWorkshop = true
+            };
             CommandsConfig = new() { Enabled = true };
+            EditorConfig = new() { AutoSave = false };
+            PluginConfig = new() { Enabled = true };
+            DeveloperConfig = new() { DebuggingEnabled = true, ConsoleEnabled = true, DisabledTypes = new[] { "JDE2.Managers.TestManager", "JDE.UI.EditorCustomTestUI" } };
         }
     }
 
@@ -86,12 +98,31 @@ namespace JDE2
     {
         public bool LoadSandbox { get; set; }
         public bool LoadMaps { get; set; }
+        public bool LoadWorkshop { get; set; }
     }
 
     public class CommandsConfig
     {
         public bool Enabled { get; set; }
     }
+
+    public class EditorConfig
+    {
+        public bool AutoSave { get; set; }
+    }
+
+    public class PluginConfig
+    {
+        public bool Enabled { get; set; }
+    }
+
+    public class DeveloperConfig
+    {
+        public bool DebuggingEnabled { get; set; }
+        public bool ConsoleEnabled { get; set; }
+        public string[] DisabledTypes { get; set; }
+    }
+
 
     public interface IDefaultable
     {
