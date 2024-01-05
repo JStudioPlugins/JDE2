@@ -13,7 +13,7 @@ namespace JDE2.UI
     {
         public SleekFullscreenBox Container { get; private set; }
 
-        public virtual ISleekElement ParentElement { get; set; }
+        public virtual ISleekElement ParentElement { get; }
 
         public bool Active { get; private set; }
 

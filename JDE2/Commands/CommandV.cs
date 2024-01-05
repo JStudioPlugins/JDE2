@@ -1,4 +1,5 @@
-﻿using SDG.Unturned;
+﻿using JDE2.Managers;
+using SDG.Unturned;
 using Steamworks;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,12 @@ namespace JDE2.Commands
         protected override void execute(CSteamID executorID, string parameter)
         {
             string[] command = Parser.getComponentsFromSerial(parameter, '/');
+            var caller = this.GetCaller();
+            var ply = PlayerTool.getPlayer(executorID);
 
             if (command.Length < 1)
             {
-                CommandWindow.LogError("INVALID PARAMETERS");
+                caller.SendChat("INVALID PARAMETERS");
             }
 
             ushort id = 0;
@@ -25,20 +28,20 @@ namespace JDE2.Commands
 
             if (!ushort.TryParse(vehicleString, out id))
             {
-                List<VehicleAsset> sortedAssets = new List<VehicleAsset>(Assets.find(EAssetType.VEHICLE).Cast<VehicleAsset>());
+                List<VehicleAsset> sortedAssets = new List<VehicleAsset>(SDG.Unturned.Assets.find(EAssetType.VEHICLE).Cast<VehicleAsset>());
                 VehicleAsset found = sortedAssets.Where(i => i.vehicleName != null).OrderBy(i => i.vehicleName.Length).Where(i => i.vehicleName.ToLower().Contains(vehicleString.ToLower())).FirstOrDefault();
                 if (found != null) id = found.id;
                 if (string.IsNullOrEmpty(vehicleString.Trim()) || id == 0)
                 {
-                    CommandWindow.LogError("INVALID PARAMETERS!");
+                    caller.SendChat("INVALID PARAMETERS!");
                     return;
                 }
             }
 
-            VehicleAsset asset = (VehicleAsset)Assets.find(EAssetType.VEHICLE, id);
+            VehicleAsset asset = (VehicleAsset)SDG.Unturned.Assets.find(EAssetType.VEHICLE, id);
 
-            VehicleTool.giveVehicle(PlayerTool.getPlayer(executorID), id);
-            CommandWindow.Log($"Gave you a {asset.vehicleName}.");
+            VehicleTool.giveVehicle(ply, id);
+            caller.SendChat($"Gave you a {asset.vehicleName}.");
         }
 
         public CommandV()

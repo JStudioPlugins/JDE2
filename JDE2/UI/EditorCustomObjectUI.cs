@@ -16,7 +16,7 @@ using UnityEngine;
 
 namespace JDE2.UI
 {
-    public class EditorCustomObjectUI : EditorCustomUI, IEditorDependent
+    public class EditorCustomObjectUI : EditorCustomUI, IEditorDependent, IDisposable
     {
         public static EditorCustomObjectUI Instance { get; private set; }
 
@@ -42,22 +42,6 @@ namespace JDE2.UI
 
         [Element(4)]
         private static ISleekButton ApplyButton;
-
-        [Element(5)]
-        [Element(6)]
-        private static ISleekUInt16Field ObjectIdField;
-
-        [Element(7)]
-        private static SleekButtonState ObjectHightlightColorButton;
-
-        [Element(8)]
-        private static ISleekButton ObjectHighlightButton;
-
-        [Element(9)]
-        private static ISleekButton ObjectHighlightSelectionButton;
-
-        [Element(10)]
-        private static ISleekButton clearObjectHighlightButton;
 
         public Vector3 LastPosition;
 
@@ -168,18 +152,6 @@ namespace JDE2.UI
             set => ReflectionTool.GetField<EditorObjects>("selection").SetValue(null, value);
         }
 
-        public Dictionary<Transform, Color> Highlighted;
-
-        public Color HighlightColor;
-
-        public void UpdateHighlights()
-        {
-            foreach (KeyValuePair<Transform, Color> highlight in Highlighted)
-            {
-                HighlighterTool.highlight(highlight.Key, highlight.Value);
-            }
-        }
-
         private static void OnClickedApplyButton(ISleekElement button)
         {
             if (Instance.Selection.Count > 0 && Instance.FocusedLevelObject != null)
@@ -231,92 +203,17 @@ namespace JDE2.UI
             return null;
         }
 
-        //ROYGBIV
-        private static void OnClickedObjectHighlightColorButton(SleekButtonState button, int index)
-        {
-            if (index == 0)
-            {
-                Instance.HighlightColor = Color.red;
-            }
-            else if (index == 1)
-            {
-                Instance.HighlightColor = Palette.COLOR_O;
-            }
-            else if (index == 2)
-            {
-                Instance.HighlightColor = Color.yellow;
-            }
-            else if (index == 3)
-            {
-                Instance.HighlightColor = Color.green;
-            }
-            else if (index == 4)
-            {
-                Instance.HighlightColor = Color.blue;
-            }
-            else if (index == 5)
-            {
-                Instance.HighlightColor = new Color(75f, 0, 130f);
-            }
-            else if (index == 6)
-            {
-                Instance.HighlightColor = new Color(128f, 0, 225f);
-            }
-        }
-
         private static void OnClickedTransformStateButton(SleekButtonState button, int index)
         {
             Instance.UpdateFields(true);
         }
 
-        private static void OnClickedObjectHighlightButton(ISleekElement button)
-        {
-            foreach (var list in LevelObjects.objects)
-            {
-                foreach (var obj in list)
-                {
-                    
-                    if (obj.asset.id == ObjectIdField.Value)
-                    {
-                        HighlighterTool.highlight(obj.transform, Instance.HighlightColor);
-                        HighlighterTool.highlight(obj.transform, Instance.HighlightColor);
-                        if (!Instance.Highlighted.ContainsKey(obj.transform))
-                        {
-                            Instance.Highlighted.Add(obj.transform, Instance.HighlightColor);
-                        }
-                    }
-                    
-
-                }
-            }
-        }
-
-        private static void OnClickedObjectHighlightSelectionButton(ISleekElement button)
-        {
-            foreach (EditorSelection obj in Instance.Selection)
-            {
-                HighlighterTool.highlight(obj.transform, Instance.HighlightColor);
-                if (!Instance.Highlighted.ContainsKey(obj.transform))
-                {
-                    Instance.Highlighted.Add(obj.transform, Instance.HighlightColor);
-                }
-
-            }
-        }
-
-        private static void OnClickedClearObjectHighlightButton(ISleekElement button)
-        {
-            foreach (var obj in Instance.Highlighted)
-            {
-                HighlighterTool.unhighlight(obj.Key);
-            }
-            Instance.Highlighted.Clear();
-        }
 
 
         public EditorCustomObjectUI() : base()
         {
             Instance = this;
+            Bundle bundle = Bundles.getBundle("/Bundles/Textures/Edit/Icons/EditorLevelObjects/EditorLevelObjects.unity3d");
 
             XField = Glazier.Get().CreateFloat32Field();
             XField.PositionOffset_X = 500;
@@ -351,7 +248,7 @@ namespace JDE2.UI
             ZField.AddLabel("Z", ESleekSide.LEFT);
             Container.AddChild(ZField);
 
-            TransformStateButton = new SleekButtonState(new GUIContent("Translate"), new GUIContent("Rotate"), new GUIContent("Scale"));
+            TransformStateButton = new SleekButtonState(new GUIContent("Translate", bundle.load<Texture2D>("Transform")), new GUIContent("Rotate", bundle.load<Texture2D>("Rotate")), new GUIContent("Scale", bundle.load<Texture2D>("Scale")));
             TransformStateButton.PositionOffset_X = -100;
             TransformStateButton.PositionOffset_Y = 5;
             TransformStateButton.PositionScale_X = 0.5f;
@@ -375,78 +272,21 @@ namespace JDE2.UI
             ApplyButton.OnClicked += OnClickedApplyButton;
             Container.AddChild(ApplyButton);
 
-            Highlighted = new Dictionary<Transform, Color>();
-
-            ObjectIdField = Glazier.Get().CreateUInt16Field();
-            ObjectIdField.PositionOffset_X = -100;
-            ObjectIdField.PositionOffset_Y = 125;
-            ObjectIdField.PositionScale_X = 0.5f;
-            ObjectIdField.PositionScale_Y = 0.5f;
-            ObjectIdField.SizeOffset_X = 200;
-            ObjectIdField.SizeOffset_Y = 30;
-            ObjectIdField.TooltipText = "The unsigned 16-bit integer ID of an object.";
-            ObjectIdField.AddLabel("ID", ESleekSide.LEFT);
-            Container.AddChild(ObjectIdField);
-
-            //ROYGBIV
-            HighlightColor = Color.red;
-            ObjectHightlightColorButton = new SleekButtonState(new GUIContent("Red"), new GUIContent("Orange"), new GUIContent("Yellow"), new GUIContent("Green"), new GUIContent("Indigo"), new GUIContent("Violet"));
-            ObjectHightlightColorButton.PositionOffset_X = -100;
-            ObjectHightlightColorButton.PositionOffset_Y = 165;
-            ObjectHightlightColorButton.PositionScale_X = 0.5f;
-            ObjectHightlightColorButton.PositionScale_Y = 0.5f;
-            ObjectHightlightColorButton.SizeOffset_X = 200;
-            ObjectHightlightColorButton.SizeOffset_Y = 30;
-            ObjectHightlightColorButton.tooltip = "Changes the color of the object highlight.";
-            ObjectHightlightColorButton.onSwappedState += OnClickedObjectHighlightColorButton;
-            Container.AddChild(ObjectHightlightColorButton);
-
-            ObjectHighlightButton = Glazier.Get().CreateButton();
-            ObjectHighlightButton.PositionOffset_X = -100;
-            ObjectHighlightButton.PositionOffset_Y = 205;
-            ObjectHighlightButton.PositionScale_X = 0.5f;
-            ObjectHighlightButton.PositionScale_Y = 0.5f;
-            ObjectHighlightButton.SizeOffset_X = 200;
-            ObjectHighlightButton.SizeOffset_Y = 30;
-            ObjectHighlightButton.Text = "Highlight Objects By ID";
-            ObjectHighlightButton.TooltipText = "Highlights the specified object.";
-            ObjectHighlightButton.OnClicked += OnClickedObjectHighlightButton;
-            Container.AddChild(ObjectHighlightButton);
-
-            ObjectHighlightSelectionButton = Glazier.Get().CreateButton();
-            ObjectHighlightSelectionButton.PositionOffset_X = -100;
-            ObjectHighlightSelectionButton.PositionOffset_Y = 245;
-            ObjectHighlightSelectionButton.PositionScale_X = 0.5f;
-            ObjectHighlightSelectionButton.PositionScale_Y = 0.5f;
-            ObjectHighlightSelectionButton.SizeOffset_X = 200;
-            ObjectHighlightSelectionButton.SizeOffset_Y = 30;
-            ObjectHighlightSelectionButton.Text = "Highlight Objects By Selection";
-            ObjectHighlightSelectionButton.TooltipText = "Highlights the selected objects.";
-            ObjectHighlightSelectionButton.OnClicked += OnClickedObjectHighlightSelectionButton;
-            Container.AddChild(ObjectHighlightSelectionButton);
-
-            clearObjectHighlightButton = Glazier.Get().CreateButton();
-            clearObjectHighlightButton.PositionOffset_X = -100;
-            clearObjectHighlightButton.PositionOffset_Y = 285;
-            clearObjectHighlightButton.PositionScale_X = 0.5f;
-            clearObjectHighlightButton.PositionScale_Y = 0.5f;
-            clearObjectHighlightButton.SizeOffset_X = 200;
-            clearObjectHighlightButton.SizeOffset_Y = 30;
-            clearObjectHighlightButton.Text = "Clear Object Highlights";
-            clearObjectHighlightButton.TooltipText = "Clears all object highlights.";
-            clearObjectHighlightButton.OnClicked += OnClickedClearObjectHighlightButton;
-            Container.AddChild(clearObjectHighlightButton);
-
             EditorCustomUIAutoSpacer spacer = new(this, 0, 40);
 
-            OnUpdateManager.Instance.OnUpdate += HandleHotkey;
-            Level.onLevelExited += HandleLevelExit;
+            OnUpdateManager.Instance.OnUpdateEvent += HandleHotkey;
+            bundle.unload();
         }
 
-        public static void HandleLevelExit()
+        ~EditorCustomObjectUI()
         {
-            OnUpdateManager.Instance.OnUpdate -= HandleHotkey;
-            Level.onLevelExited -= HandleLevelExit;
+            Dispose();
+        }
+
+        public void Dispose()
+        {
+            OnUpdateManager.Instance.OnUpdateEvent -= HandleHotkey;
+            GC.SuppressFinalize(this);
         }
 
         private static void HandleHotkey()
@@ -495,17 +335,6 @@ namespace JDE2.UI
         internal static void closePostfix()
         {
             EditorCustomObjectUI.Instance.Close();
-        }
-    }
-
-    [HarmonyPatch(typeof(EditorObjects))]
-    [HarmonyPatch("Update")]
-    class UpdateEditorObjectsPatch
-    {
-        [HarmonyPostfix]
-        internal static void UpdatePostfix()
-        {
-            EditorCustomObjectUI.Instance?.UpdateHighlights();
         }
     }
 }

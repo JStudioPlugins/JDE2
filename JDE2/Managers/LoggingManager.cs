@@ -1,4 +1,5 @@
-﻿using JDE2.SituationDependent;
+﻿using HarmonyLib;
+using JDE2.SituationDependent;
 using Microsoft.Win32.SafeHandles;
 using Newtonsoft.Json.Linq;
 using SDG.Unturned;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -23,14 +25,21 @@ namespace JDE2.Managers
 
             UnturnedLog.info(RemoveAnsiSyntax(debug ? "[DEBUG]: " + message : message));
             if (!ConsoleManager.Enabled && !RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) return;
-            string modified = debug ? $"{{gray}}[DEBUG]{{0}}{{dark-gray}}[{DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss")}]:{{0}} {message}" : $"~dark-gray~[{DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss")}]:~0~ {message}";
+            string modified = debug ? $"{{{{gray}}}}[DEBUG]{{{{0}}}}{{{{dark-gray}}}}[{DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss")}]:{{{{0}}}} {message}" : $"{{{{dark-gray}}}}[{DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss")}]:{{{{0}}}} {message}";
+            Console.WriteLine(ParseAnsiSyntax(modified));
+        }
+
+        public static void LogError(string message)
+        {
+            UnturnedLog.error(RemoveAnsiSyntax(message));
+            string modified = $"{{{{dark-gray}}}}[{DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss")}]:{{{{_}}}} {{{{red}}}}{message}{{{{_}}}}";
             Console.WriteLine(ParseAnsiSyntax(modified));
         }
 
         public static void LogException(Exception ex, string message = "")
         {
             UnturnedLog.exception(ex, RemoveAnsiSyntax(message));
-            string modified = $"~dark-gray~[{DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss")}]:~0~ ~white~{message}~0~\n~red~{ex.Message}~0~";
+            string modified = $"{{{{dark-gray}}}}[{DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss")}]:{{{{0}}}} {{{{white}}}}{message}{{{{red}}}}\n{ex.Message}{{{{0}}}}";
             Console.WriteLine(ParseAnsiSyntax(modified));
         }
 
@@ -95,6 +104,17 @@ namespace JDE2.Managers
                 default:
                     return "\u001b[0;0m"; // Default color
             }
+        }
+
+        public static void LogSleekElement(ISleekElement element, bool debug = false, string name = null)
+        {
+            Log($"LOG FOR {{{{cyan}}}}{element.GetType().FullName}{{{{_}}}} " + name == null ? $"- {{{{cyan}}}}{name}{{{{_}}}}" : "", debug);
+            Log($"PositionOffset_X: {element.PositionOffset_X}", debug);
+            Log($"PositionOffset_Y: {element.PositionOffset_Y}", debug);
+            Log($"SizeOffset_X: {element.SizeOffset_X}", debug);
+            Log($"SizeOffset_Y: {element.SizeOffset_Y}", debug);
+            Log($"PositionScale_X: {element.PositionScale_X}", debug);
+            Log($"PositionScale_Y: {element.PositionScale_Y}", debug);
         }
     }
 }

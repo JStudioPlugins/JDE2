@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JDE2.Managers;
 
 namespace JDE2.Commands
 {
@@ -12,11 +13,11 @@ namespace JDE2.Commands
     {
         protected override void execute(CSteamID executorID, string parameter)
         {
-            var ply = PlayerTool.getPlayer(executorID).life;
-            ply.askHeal(100, true, true);
-            ply.askDisinfect(100);
-            ply.askDrink(100);
-            ply.askEat(100);
+            Player ply = this.GetCaller().Player;
+            ply.life.askHeal(100, true, true);
+            ply.life.askDisinfect(100);
+            ply.life.askDrink(100);
+            ply.life.askEat(100);
         }
 
 

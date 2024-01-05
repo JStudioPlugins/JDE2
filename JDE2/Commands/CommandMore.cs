@@ -1,4 +1,5 @@
-﻿using SDG.Unturned;
+﻿using JDE2.Managers;
+using SDG.Unturned;
 using Steamworks;
 using System;
 using System.Collections.Generic;
@@ -13,16 +14,17 @@ namespace JDE2.Commands
 
         protected override void execute(CSteamID executorID, string parameter)
         {
-            Player player = PlayerTool.getPlayer(executorID);
-            if (player.equipment.asset == null)
+            var caller = this.GetCaller();
+            if (caller.Player.equipment.asset == null)
             {
-                CommandWindow.LogError("NOT HOLDING ITEM!");
+                caller.SendChat("NOT HOLDING ITEM!");
                 return;
             }
             byte amount;
             byte.TryParse(parameter, out amount);
 
-            ItemTool.tryForceGiveItem(player, player.equipment.itemID, amount);
+            ItemTool.tryForceGiveItem(caller.Player, caller.Player.equipment.itemID, amount);
+            caller.SendChat($"Gave {amount} {caller.Player.equipment.asset.itemName}!");
         }
 
         public CommandMore()

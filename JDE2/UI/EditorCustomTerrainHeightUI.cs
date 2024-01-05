@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using JDE2.Managers;
 using JDE2.SituationDependent;
 using SDG.Unturned;
 using System;
@@ -80,32 +81,32 @@ namespace JDE2.UI
 
         private void OnRightClickedPreset1(ISleekElement button)
         {
-            
+            TerrainHeightPresetManager.Instance.CopyTo(0);
         }
 
         private void OnRightClickedPreset2(ISleekElement button)
         {
-
+            TerrainHeightPresetManager.Instance.CopyTo(1);
         }
 
         private void OnRightClickedPreset3(ISleekElement button)
         {
-
+            TerrainHeightPresetManager.Instance.CopyTo(2);
         }
 
         private void OnClickedPreset1(ISleekElement button)
         {
-            
+            TerrainHeightPresetManager.Instance.CopyFrom(0);
         }
 
         private void OnClickedPreset2(ISleekElement button)
         {
-            
+            TerrainHeightPresetManager.Instance.CopyFrom(1);
         }
 
         private void OnClickedPreset3(ISleekElement button)
         {
-
+            TerrainHeightPresetManager.Instance.CopyFrom(2);
         }
     }
 

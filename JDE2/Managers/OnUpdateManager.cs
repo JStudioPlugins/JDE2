@@ -13,7 +13,9 @@ namespace JDE2.Managers
     {
         public static OnUpdateManager Instance { get; private set; }
 
-        public event Action OnUpdate;
+        public event Action OnUpdateEvent;
+
+        public event Action OnGUIEvent;
 
         void Awake()
         {
@@ -22,7 +24,12 @@ namespace JDE2.Managers
 
         void Update()
         {
-            OnUpdate?.Invoke();
+            OnUpdateEvent?.Invoke();
+        }
+
+        void OnGUI()
+        {
+            OnGUIEvent?.Invoke();
         }
     }
 }

@@ -25,7 +25,7 @@ namespace JDE2.Managers
         {
             get
             { 
-                string path = Path.Combine(UnturnedPaths.RootDirectory.FullName, "Modules", "JDE2", "Plugins"); 
+                string path = Path.Combine(UnturnedPaths.RootDirectory.FullName, "Modules", "JDE2", "Plugins");
                 if (!Directory.Exists(path)) Directory.CreateDirectory(path);
                 return path;
             }
@@ -44,7 +44,7 @@ namespace JDE2.Managers
             foreach (string pluginLibrary in Directory.GetFiles(PluginsDirectory, "*.dll", SearchOption.AllDirectories))
             {
                 Plugins.Add(Assembly.LoadFile(pluginLibrary));
-                LoggingManager.Log($"Mounted {{cyan}}{pluginLibrary}{{_}}!");
+                LoggingManager.Log($"Mounted {{{{cyan}}}}{pluginLibrary}{{{{_}}}}!");
             }
 
             foreach (Assembly plugin in Plugins)
@@ -102,6 +102,19 @@ namespace JDE2.Managers
             foreach (Assembly plugin in PluginManager.Instance.Plugins)
             {
                 DependentManager.ActivateDependentsByType<IConsoleDependent>(plugin);
+            }
+        }
+    }
+
+    public class PluginIMultiplayerDependentLoader : IMultiplayerDependent
+    {
+        public PluginIMultiplayerDependentLoader()
+        {
+            if (!PluginManager.Enabled) return;
+
+            foreach (Assembly plugin in PluginManager.Instance.Plugins)
+            {
+                DependentManager.ActivateDependentsByType<IMultiplayerDependent>(plugin);
             }
         }
     }

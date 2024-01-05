@@ -16,6 +16,9 @@ using UnityEngine.SceneManagement;
 using Action = System.Action;
 using System.Threading;
 using JDE2.SituationDependent;
+using Module = SDG.Framework.Modules.Module;
+using Steamworks;
+using System.IO;
 
 namespace JDE2
 {
@@ -23,11 +26,13 @@ namespace JDE2
     {
         public Assembly Assembly { get => typeof(Main).Assembly; }
 
-        public static string Directory { get => UnturnedPaths.RootDirectory.FullName + "Modules/JDE2"; }
+        public static string Directory { get => Path.Combine(UnturnedPaths.RootDirectory.FullName, "Modules", "JDE2"); }
 
         public static GameObject BackingObj { get; private set; }
 
         public static Main Instance { get; private set; }
+
+        public static Module Module { get; private set; }
 
         public event Action OnLoad;
 
@@ -38,17 +43,19 @@ namespace JDE2
         public void initialize()
         {
             Instance = this;
+            Module = ModuleHook.modules.FirstOrDefault(x => x.config.Name == "JDE2" && x.config.Version == Assembly.GetName().Version.ToString());
 
             UnturnedLog.info($"ATTEMPTING TO LOAD {Assembly.GetName().Name} {Assembly.GetName().Version}.");
             UnturnedLog.info($"GENERATING AND LOADING CONFIGURATION FOR {Assembly.GetName().Name}.");
             new Config();
+
 
             //Turn on plugin stuff.
             new PluginManager();
 
             //Console stuff.
             new ConsoleManager();
-            LoggingManager.Log($"{{blue}}Now running JDE2 {Assembly.GetName().Version} - For support and additonal documentation, visit the JStudio Discord at https://discord.gg/XBSGmGTNWP {{_}}");
+            LoggingManager.Log($"{{{{blue}}}}Now running JDE2 {Assembly.GetName().Version} - For support and additonal documentation, visit the JStudio Discord at https://discord.gg/XBSGmGTNWP {{{{_}}}}");
 
             BackingObj = new GameObject();
             GameObject.DontDestroyOnLoad(BackingObj);

@@ -1,7 +1,7 @@
 ﻿{
     "IsEnabled": true,
     "Name": "JDE2",
-    "Version": "1.0.0.0",
+    "Version": "1.23.4.0",
     "Assemblies":
     [
         {
@@ -10,6 +10,10 @@
         },
         {
             "Path": "/0Harmony.dll",
+            "Role": "Both_Optional"
+        },
+        {
+            "Path": "/UnturnedUITools.dll",
             "Role": "Both_Optional"
         }
     ]

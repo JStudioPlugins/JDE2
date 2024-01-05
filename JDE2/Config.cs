@@ -50,6 +50,14 @@ namespace JDE2
             }
         }
 
+        public void Reset()
+        {
+            ConfigModel data = new ConfigModel();
+            data.LoadDefaults();
+            Data = data;
+            Save();
+        }
+
         public void Read()
         {
             if (File.Exists(DataPath))
@@ -88,7 +96,11 @@ namespace JDE2
                 LoadWorkshop = true
             };
             CommandsConfig = new() { Enabled = true };
-            EditorConfig = new() { AutoSave = false };
+            EditorConfig = new() 
+            {
+                AutoSave = false,
+                RoadVisuals = true
+            };
             PluginConfig = new() { Enabled = true };
             DeveloperConfig = new() { DebuggingEnabled = true, ConsoleEnabled = true, DisabledTypes = new[] { "JDE2.Managers.TestManager", "JDE.UI.EditorCustomTestUI" } };
         }
@@ -109,6 +121,7 @@ namespace JDE2
     public class EditorConfig
     {
         public bool AutoSave { get; set; }
+        public bool RoadVisuals { get; set; }
     }
 
     public class PluginConfig

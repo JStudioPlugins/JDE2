@@ -23,6 +23,21 @@ namespace JDE2.Utils
             
         }
 
+        public static List<Type> GetTypesFromInterface(List<Assembly> assemblies, Type typeInterface)
+        {
+            List<Type> allTypes = new List<Type>();
+            foreach (Assembly assembly in assemblies)
+            {
+                allTypes.AddRange(GetTypesFromInterface(assembly, typeInterface));
+            }
+            return allTypes;
+        }
+
+        public static List<Type> GetTypesFromInterface<T>(List<Assembly> assemblies)
+        {
+            return GetTypesFromInterface(assemblies, typeof(T));
+        }
+
         public static List<Type> GetTypesFromInterface(Assembly assembly, string interfaceName)
         {
             List<Type> allTypes = new List<Type>();
@@ -43,6 +58,33 @@ namespace JDE2.Utils
                 }
             }
             return allTypes;
+        }
+
+        public static List<Type> GetTypesFromInterface(Assembly assembly, Type typeInterface)
+        {
+            List<Type> allTypes = new List<Type>();
+            Type[] types;
+            try
+            {
+                types = assembly.GetTypes();
+            }
+            catch (ReflectionTypeLoadException e)
+            {
+                types = e.Types;
+            }
+            foreach (Type type in types.Where(t => t != null))
+            {
+                if (type.GetInterface(typeInterface.Name) != null)
+                {
+                    allTypes.Add(type);
+                }
+            }
+            return allTypes;
+        }
+
+        public static List<Type> GetTypesFromInterface<T>(Assembly assembly)
+        {
+            return GetTypesFromInterface(assembly, typeof(T));
         }
 
         public static Dictionary<string, string> GetAssembliesFromDirectory(string directory, string extension = "*.dll")
