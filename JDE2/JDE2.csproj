@@ -43,6 +43,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\com.rlabrecque.steamworks.net.dll</HintPath>
     </Reference>
+    <Reference Include="MathEngine, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ShimmyMySherbet.MathEngine.1.0.0\lib\net48\MathEngine.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=3.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.3.1.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
     </Reference>
@@ -189,6 +192,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssetDebugging\BarricadeClipPrefabDebug.cs" />
+    <Compile Include="AssetDebugging\ObjectClipPrefabDebug.cs" />
+    <Compile Include="AssetDebugging\IAssetDebug.cs" />
+    <Compile Include="AssetDebugging\ModelDecalableShaderDebug.cs" />
+    <Compile Include="AssetDebugging\ModelPlacementPreviewDebug.cs" />
     <Compile Include="Assets\ICustomAsset.cs" />
     <Compile Include="Assets\TestAsset.cs" />
     <Compile Include="Commands\Callers\EditorCaller.cs" />
@@ -213,11 +221,14 @@
     <Compile Include="Managers\EditorChatManager.cs" />
     <Compile Include="Managers\LoggingManager.cs" />
     <Compile Include="Managers\OnUpdateManager.cs" />
+    <Compile Include="Managers\OptionManager.cs" />
     <Compile Include="Managers\PatchManager.cs" />
     <Compile Include="Managers\PluginManager.cs" />
     <Compile Include="Managers\RoadParallelTestManager_GOTO.cs" />
     <Compile Include="Managers\RoadVisualsManager.cs" />
     <Compile Include="Managers\TerrainHeightPresetManager.cs" />
+    <Compile Include="Options\IOption.cs" />
+    <Compile Include="Options\WeirdToggleOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SituationDependent\IConsoleDependent.cs" />
     <Compile Include="SituationDependent\IDependent.cs" />
@@ -228,6 +239,7 @@
     <Compile Include="SituationDependent\ISingleplayerDependent.cs" />
     <Compile Include="UI\EditorLevelObjectsUIExtension.cs" />
     <Compile Include="UI\EditorUIExtension.cs" />
+    <Compile Include="UI\MenuConfigurationOptionsUIExtension.cs" />
     <Compile Include="UI\MenuDashboardUIExtension.cs" />
     <Compile Include="UI\MenuWorkshopSubmitUIExtension.cs" />
     <Compile Include="UI\UIExtensionWrapper.cs" />
@@ -240,6 +252,7 @@
     <Compile Include="UI\EditorCustomTerrainHeightUI.cs" />
     <Compile Include="UI\EditorCustomUI.cs" />
     <Compile Include="UI\EditorCustomUIAutoSpacer.cs" />
+    <Compile Include="Utils\SleekTool.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="lib\0Harmony.dll" />

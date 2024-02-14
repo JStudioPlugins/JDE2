@@ -33,6 +33,18 @@ namespace JDE2.Utils
             return allTypes;
         }
 
+        public static Type GetTopmostType(this Type type)
+        {
+            Type currentType = type;
+
+            while (currentType.BaseType != null)
+            {
+                currentType = currentType.BaseType;
+            }
+
+            return currentType;
+        }
+
         public static List<Type> GetTypesFromInterface<T>(List<Assembly> assemblies)
         {
             return GetTypesFromInterface(assemblies, typeof(T));
@@ -80,6 +92,31 @@ namespace JDE2.Utils
                 }
             }
             return allTypes;
+        }
+
+        public static List<Type> GetTypesFromBaseClass(Assembly assembly, Type baseClass)
+        {
+            List<Type> allTypes = new List<Type>();
+            Type[] types;
+            try
+            {
+                types = assembly.GetTypes();
+            }
+            catch (ReflectionTypeLoadException e)
+            {
+                types = e.Types;
+            }
+            foreach (Type type in types.Where(t => t != null))
+            {
+                if (type.IsAssignableFrom(baseClass))
+                    allTypes.Add(type);
+            }
+            return allTypes;
+        }
+
+        public static List<Type> GetTypesFromBaseClass<T>(Assembly assembly) where T : class
+        {
+            return GetTypesFromBaseClass(assembly, typeof(T));
         }
 
         public static List<Type> GetTypesFromInterface<T>(Assembly assembly)

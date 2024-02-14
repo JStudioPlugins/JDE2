@@ -34,6 +34,10 @@ namespace JDE2.Managers
 
         public List<Assembly> Plugins { get; private set; }
 
+        public delegate void PostPluginsLoaded();
+
+        public event PostPluginsLoaded OnPostPluginsLoaded;
+
         public PluginManager()
         {
             if (!Enabled) return;
@@ -51,6 +55,8 @@ namespace JDE2.Managers
             {
                 DependentManager.ActivateDependentsByType<IJDEDependent>(plugin);
             }
+
+            OnPostPluginsLoaded?.Invoke();
         }
     }
 

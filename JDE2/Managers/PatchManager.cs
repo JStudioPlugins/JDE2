@@ -22,7 +22,7 @@ namespace JDE2.Managers
             Main.Instance.OnUnload += CleanUp;
         }
 
-        public static Harmony harmony;
+        internal static Harmony harmony;
         public const string harmonyId = "Jdance.JDE2";
 
         public void Init()
@@ -51,5 +51,10 @@ namespace JDE2.Managers
             }
             Instance = null;
         }
+    }
+
+    public interface IPatch
+    {
+
     }
 }

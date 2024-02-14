@@ -2,6 +2,7 @@
 using JDE2.Managers;
 using JDE2.SituationDependent;
 using JDE2.Utils;
+using MathEngine;
 using SDG.Unturned;
 using System;
 using System.CodeDom;
@@ -29,13 +30,19 @@ namespace JDE2.UI
         public override float ContainerSizeScaleY => 1f;
 
         [Element(0)]
-        private static ISleekFloat32Field XField;
+        private static ISleekField XField;
+
+        private static float _x;
 
         [Element(1)]
-        private static ISleekFloat32Field YField;
+        private static ISleekField YField;
+
+        private static float _y;
 
         [Element(2)]
-        private static ISleekFloat32Field ZField;
+        private static ISleekField ZField;
+
+        private static float _z;
 
         [Element(3)]
         private static SleekButtonState TransformStateButton;
@@ -64,17 +71,17 @@ namespace JDE2.UI
                         if (FocusedLevelObject.transform.position != LastPosition)
                         {
                             LastPosition = FocusedLevelObject.transform.position;
-                            XField.Value = FocusedLevelObject.transform.position.x;
-                            YField.Value = FocusedLevelObject.transform.position.y;
-                            ZField.Value = FocusedLevelObject.transform.position.z;
+                            _x = FocusedLevelObject.transform.position.x;
+                            _y = FocusedLevelObject.transform.position.y;
+                            _z = FocusedLevelObject.transform.position.z;
                         }
                     }
                     else
                     {
                         LastPosition = FocusedLevelObject.transform.position;
-                        XField.Value = FocusedLevelObject.transform.position.x;
-                        YField.Value = FocusedLevelObject.transform.position.y;
-                        ZField.Value = FocusedLevelObject.transform.position.z;
+                        _x = FocusedLevelObject.transform.position.x;
+                        _y = FocusedLevelObject.transform.position.y;
+                        _z = FocusedLevelObject.transform.position.z;
                     }
                 }
                 else if (TransformStateButton.state == 1)
@@ -84,17 +91,17 @@ namespace JDE2.UI
                         if (FocusedLevelObject.transform.eulerAngles != LastRotation)
                         {
                             LastRotation = FocusedLevelObject.transform.eulerAngles;
-                            XField.Value = FocusedLevelObject.transform.eulerAngles.x;
-                            YField.Value = FocusedLevelObject.transform.eulerAngles.y;
-                            ZField.Value = FocusedLevelObject.transform.eulerAngles.z;
+                            _x = FocusedLevelObject.transform.eulerAngles.x;
+                            _y = FocusedLevelObject.transform.eulerAngles.y;
+                            _z = FocusedLevelObject.transform.eulerAngles.z;
                         }
                     }
                     else
                     {
                         LastRotation = FocusedLevelObject.transform.eulerAngles;
-                        XField.Value = FocusedLevelObject.transform.eulerAngles.x;
-                        YField.Value = FocusedLevelObject.transform.eulerAngles.y;
-                        ZField.Value = FocusedLevelObject.transform.eulerAngles.z;
+                        _x = FocusedLevelObject.transform.eulerAngles.x;
+                        _y = FocusedLevelObject.transform.eulerAngles.y;
+                        _z = FocusedLevelObject.transform.eulerAngles.z;
                     }
                 }
                 else
@@ -104,29 +111,37 @@ namespace JDE2.UI
                         if (FocusedLevelObject.transform.localScale != LastScale)
                         {
                             LastScale = FocusedLevelObject.transform.localScale;
-                            XField.Value = FocusedLevelObject.transform.localScale.x;
-                            YField.Value = FocusedLevelObject.transform.localScale.y;
-                            ZField.Value = FocusedLevelObject.transform.localScale.z;
+                            _x = FocusedLevelObject.transform.localScale.x;
+                            _y = FocusedLevelObject.transform.localScale.y;
+                            _z = FocusedLevelObject.transform.localScale.z;
                         }
                     }
                     else
                     {
                         LastScale = FocusedLevelObject.transform.localScale;
-                        XField.Value = FocusedLevelObject.transform.localScale.x;
-                        YField.Value = FocusedLevelObject.transform.localScale.y;
-                        ZField.Value = FocusedLevelObject.transform.localScale.z;
+                        _x = FocusedLevelObject.transform.localScale.x;
+                        _y = FocusedLevelObject.transform.localScale.y;
+                        _z = FocusedLevelObject.transform.localScale.z;
                     }
                 }
             }
             else
             {
-                XField.Value = 0f;
-                YField.Value = 0f;
-                ZField.Value = 0f;
+                _x = 0f;
+                _y = 0f;
+                _z = 0f;
                 LastPosition = new Vector3();
                 LastRotation = new Vector3();
                 LastScale = new Vector3();
             }
+            ApplyFields();
+        }
+
+        private static void ApplyFields()
+        {
+            XField.Text = _x.ToString();
+            YField.Text = _y.ToString();
+            ZField.Text = _z.ToString();
         }
 
         public LevelObject FocusedLevelObject
@@ -162,7 +177,7 @@ namespace JDE2.UI
                     if (TransformStateButton.state == 0)
                     {
                         LevelObject levelObj = FindLevelObject(obj.transform.gameObject);
-                        Vector3 difference = new Vector3(XField.Value - Instance.FocusedLevelObject.transform.position.x, YField.Value - Instance.FocusedLevelObject.transform.position.y, ZField.Value - Instance.FocusedLevelObject.transform.position.z);
+                        Vector3 difference = new Vector3(_x - Instance.FocusedLevelObject.transform.position.x, _y - Instance.FocusedLevelObject.transform.position.y, _z - Instance.FocusedLevelObject.transform.position.z);
                         Vector3 change = new Vector3(levelObj.transform.position.x + difference.x, levelObj.transform.position.y + difference.y, levelObj.transform.position.z + difference.z);
                         LevelObjects.registerTransformObject(levelObj.transform, change, levelObj.transform.rotation, levelObj.transform.localScale, levelObj.transform.position, levelObj.transform.rotation, levelObj.transform.localScale);
                         levelObj.transform.position = change;
@@ -171,7 +186,7 @@ namespace JDE2.UI
                     {
                         LevelObject levelObj = FindLevelObject(obj.transform.gameObject);
                         Vector3 original = Instance.FocusedLevelObject.transform.eulerAngles;
-                        Vector3 difference = new Vector3(XField.Value - original.x, YField.Value - original.y, ZField.Value - original.z);
+                        Vector3 difference = new Vector3(_x - original.x, _y - original.y, _z - original.z);
                         Vector3 levelObjOriginal = levelObj.transform.eulerAngles;
                         Vector3 change = new Vector3(levelObjOriginal.x + difference.x, levelObjOriginal.y + difference.y, levelObjOriginal.z + difference.z);
                         LevelObjects.registerTransformObject(levelObj.transform, levelObj.transform.position, Quaternion.Euler(change), levelObj.transform.localScale, levelObj.transform.position, levelObj.transform.rotation, levelObj.transform.localScale);
@@ -179,7 +194,7 @@ namespace JDE2.UI
                     else
                     {
                         LevelObject levelObj = FindLevelObject(obj.transform.gameObject);
-                        Vector3 difference = new Vector3(XField.Value - Instance.FocusedLevelObject.transform.localScale.x, YField.Value - Instance.FocusedLevelObject.transform.localScale.y, ZField.Value - Instance.FocusedLevelObject.transform.localScale.z);
+                        Vector3 difference = new Vector3(_x - Instance.FocusedLevelObject.transform.localScale.x, _y - Instance.FocusedLevelObject.transform.localScale.y, _z - Instance.FocusedLevelObject.transform.localScale.z);
                         Vector3 change = new Vector3(levelObj.transform.localScale.x + difference.x, levelObj.transform.localScale.y + difference.y, levelObj.transform.localScale.z + difference.z);
                         LevelObjects.registerTransformObject(levelObj.transform, levelObj.transform.localScale, levelObj.transform.rotation, change, levelObj.transform.position, levelObj.transform.rotation, levelObj.transform.localScale);
                     }
@@ -215,37 +230,43 @@ namespace JDE2.UI
             Instance = this;
             Bundle bundle = Bundles.getBundle("/Bundles/Textures/Edit/Icons/EditorLevelObjects/EditorLevelObjects.unity3d");
 
-            XField = Glazier.Get().CreateFloat32Field();
+            XField = Glazier.Get().CreateStringField();
             XField.PositionOffset_X = 500;
             XField.PositionOffset_Y = -115;
             XField.PositionScale_X = 0.5f;
             XField.PositionScale_Y = 0.5f;
             XField.SizeOffset_X = 200;
             XField.SizeOffset_Y = 30;
-            XField.Value = 0f;
+            XField.Text = 0f.ToString();
             XField.AddLabel("X", ESleekSide.LEFT);
+            XField.OnTextSubmitted += XField_OnTextSubmitted;
+            _x = 0f;
             Container.AddChild(XField);
 
-            YField = Glazier.Get().CreateFloat32Field();
+            YField = Glazier.Get().CreateStringField();
             YField.PositionOffset_X = -100;
             YField.PositionOffset_Y = -75;
             YField.PositionScale_X = 0.5f;
             YField.PositionScale_Y = 0.5f;
             YField.SizeOffset_X = 200;
             YField.SizeOffset_Y = 30;
-            YField.Value = 0f;
+            YField.Text = 0f.ToString();
             YField.AddLabel("Y", ESleekSide.LEFT);
+            YField.OnTextSubmitted += YField_OnTextSubmitted;
+            _y = 0f;
             Container.AddChild(YField);
 
-            ZField = Glazier.Get().CreateFloat32Field();
+            ZField = Glazier.Get().CreateStringField();
             ZField.PositionOffset_X = -100;
             ZField.PositionOffset_Y = -35;
             ZField.PositionScale_X = 0.5f;
             ZField.PositionScale_Y = 0.5f;
             ZField.SizeOffset_X = 200;
             ZField.SizeOffset_Y = 30;
-            ZField.Value = 0f;
+            ZField.Text = 0f.ToString();
             ZField.AddLabel("Z", ESleekSide.LEFT);
+            ZField.OnTextSubmitted += ZField_OnTextSubmitted;
+            _z = 0f;
             Container.AddChild(ZField);
 
             TransformStateButton = new SleekButtonState(new GUIContent("Translate", bundle.load<Texture2D>("Transform")), new GUIContent("Rotate", bundle.load<Texture2D>("Rotate")), new GUIContent("Scale", bundle.load<Texture2D>("Scale")));
@@ -276,6 +297,24 @@ namespace JDE2.UI
 
             OnUpdateManager.Instance.OnUpdateEvent += HandleHotkey;
             bundle.unload();
+        }
+
+        private void ZField_OnTextSubmitted(ISleekField field)
+        {
+            var math = new MathEngine.MathEngine();
+            _z = (float)math.Calculate(ZField.Text);
+        }
+
+        private void YField_OnTextSubmitted(ISleekField field)
+        {
+            var math = new MathEngine.MathEngine();
+            _y = (float)math.Calculate(YField.Text);
+        }
+
+        private void XField_OnTextSubmitted(ISleekField field)
+        {
+            var math = new MathEngine.MathEngine();
+            _x = (float)math.Calculate(XField.Text);
         }
 
         ~EditorCustomObjectUI()

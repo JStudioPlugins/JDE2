@@ -39,7 +39,7 @@ namespace JDE2.Managers
         public static void LogException(Exception ex, string message = "")
         {
             UnturnedLog.exception(ex, RemoveAnsiSyntax(message));
-            string modified = $"{{{{dark-gray}}}}[{DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss")}]:{{{{0}}}} {{{{white}}}}{message}{{{{red}}}}\n{ex.Message}{{{{0}}}}";
+            string modified = $"{{{{dark-gray}}}}[{DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss")}]:{{{{_}}}} {{{{white}}}}{message}{{{{_}}}}{{{{red}}}}\n{ex.Message}{{{{_}}}}";
             Console.WriteLine(ParseAnsiSyntax(modified));
         }
 

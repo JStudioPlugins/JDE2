@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using DanielWillett.UITools.Util;
+using HarmonyLib;
 using JDE2.Managers;
 using JDE2.SituationDependent;
 using SDG.Unturned;
@@ -27,11 +28,17 @@ namespace JDE2.UI
         [Element(0)]
         private static ISleekButton PresetButton1;
 
+        private static ISleekButton PresetButton1Add;
+
         [Element(1)]
         private static ISleekButton PresetButton2;
 
+        private static ISleekButton PresetButton2Add;
+
         [Element(2)]
         private static ISleekButton PresetButton3;
+
+        private static ISleekButton PresetButton3Add;
 
         public EditorCustomTerrainUI() : base()
         {
@@ -47,7 +54,6 @@ namespace JDE2.UI
             PresetButton1.Text = "Preset 1";
             PresetButton1.TooltipText = "Terrain brush preset. Right-click to set.";
             PresetButton1.OnClicked += OnClickedPreset1;
-            PresetButton1.OnRightClicked += OnRightClickedPreset1;
             Container.AddChild(PresetButton1);
 
             PresetButton2 = Glazier.Get().CreateButton();
@@ -60,7 +66,6 @@ namespace JDE2.UI
             PresetButton2.Text = "Preset 2";
             PresetButton2.TooltipText = "Terrain brush preset. Right-click to set.";
             PresetButton2.OnClicked += OnClickedPreset2;
-            PresetButton2.OnRightClicked += OnRightClickedPreset2;
             Container.AddChild(PresetButton2);
 
             PresetButton3 = Glazier.Get().CreateButton();
@@ -73,10 +78,40 @@ namespace JDE2.UI
             PresetButton3.Text = "Preset 3";
             PresetButton3.TooltipText = "Terrain brush preset. Right-click to set.";
             PresetButton3.OnClicked += OnClickedPreset3;
-            PresetButton3.OnRightClicked += OnRightClickedPreset3;
             Container.AddChild(PresetButton3);
 
             EditorCustomUIAutoSpacer spacer = new(this, 0, 40);
+
+            PresetButton1Add = Glazier.Get().CreateButton();
+            PresetButton1Add.CopyTransformFrom(PresetButton1);
+            PresetButton1Add.SizeOffset_X = 30;
+            PresetButton1Add.SizeOffset_Y = 30;
+            PresetButton1Add.PositionOffset_X = 660;
+            PresetButton1Add.Text = "+";
+            PresetButton1Add.TooltipText = "Set the brush.";
+            PresetButton1Add.OnClicked += OnRightClickedPreset1;
+            Container.AddChild(PresetButton1Add);
+
+            PresetButton2Add = Glazier.Get().CreateButton();
+            PresetButton2Add.CopyTransformFrom(PresetButton2);
+            PresetButton2Add.SizeOffset_X = 30;
+            PresetButton2Add.SizeOffset_Y = 30;
+            PresetButton2Add.PositionOffset_X = 660;
+            PresetButton2Add.Text = "+";
+            PresetButton2Add.TooltipText = "Set the brush.";
+            PresetButton2Add.OnClicked += OnRightClickedPreset2;
+            Container.AddChild(PresetButton2Add);
+
+            PresetButton3Add = Glazier.Get().CreateButton();
+            PresetButton3Add.CopyTransformFrom(PresetButton3);
+            PresetButton3Add.SizeOffset_X = 30;
+            PresetButton3Add.SizeOffset_Y = 30;
+            PresetButton3Add.PositionOffset_X = 660;
+            PresetButton3Add.Text = "+";
+            PresetButton3Add.TooltipText = "Set the brush.";
+            PresetButton3Add.OnClicked += OnRightClickedPreset3;
+            Container.AddChild(PresetButton3Add);
+
         }
 
         private void OnRightClickedPreset1(ISleekElement button)

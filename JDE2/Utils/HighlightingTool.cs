@@ -52,7 +52,7 @@ namespace JDE2.Utils
         {
             if (index == 0)
             {
-                return Color.red;
+                return Palette.COLOR_R;
             }
             else if (index == 1)
             {
@@ -60,15 +60,15 @@ namespace JDE2.Utils
             }
             else if (index == 2)
             {
-                return Color.yellow;
+                return Palette.COLOR_Y;
             }
             else if (index == 3)
             {
-                return Color.green;
+                return Palette.COLOR_O;
             }
             else if (index == 4)
             {
-                return Color.blue;
+                return Palette.COLOR_B;
             }
             else if (index == 5)
             {
@@ -76,11 +76,11 @@ namespace JDE2.Utils
             }
             else if (index == 6)
             {
-                return new Color(128f, 0, 225f);
+                return Palette.COLOR_P;
             }
             else
             {
-                return Color.red;
+                return Palette.COLOR_R;
             }
         }
 
