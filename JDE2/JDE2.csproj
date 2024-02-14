@@ -1,303 +1,52 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{89C7BFB3-29A5-4136-9AC0-9EA3A4BDC0EB}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JDE2</RootNamespace>
-    <AssemblyName>JDE2</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFramework>net48</TargetFramework>
     <LangVersion>preview</LangVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
+    <AssemblyTitle>JDE2</AssemblyTitle>
+    <Product>JDE2</Product>
+    <Copyright>Copyright ©  2023</Copyright>
+    <AssemblyVersion>1.24.1.101</AssemblyVersion>
+    <FileVersion>1.23.1.101</FileVersion>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony, Version=2.2.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lib.Harmony.2.2.2\lib\net48\0Harmony.dll</HintPath>
-    </Reference>
-    <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\Assembly-CSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="com.rlabrecque.steamworks.net, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\com.rlabrecque.steamworks.net.dll</HintPath>
-    </Reference>
-    <Reference Include="MathEngine, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ShimmyMySherbet.MathEngine.1.0.0\lib\net48\MathEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=3.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.3.1.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="ReflectionTools, Version=2.0.1.0, Culture=neutral, PublicKeyToken=6a3a944a5a8d6b8f, processorArchitecture=MSIL">
-      <HintPath>..\packages\DanielWillett.ReflectionTools.2.0.1\lib\net471\ReflectionTools.dll</HintPath>
-    </Reference>
-    <Reference Include="SDG.Glazier.Runtime, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\SDG.Glazier.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="SDG.HostBans.Runtime, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\SDG.HostBans.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="SDG.NetPak.Runtime, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\SDG.NetPak.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="SDG.NetTransport, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\SDG.NetTransport.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
+    <PackageReference Include="DanielWillett.ReflectionTools" Version="2.0.1" />
+    <PackageReference Include="DanielWillett.UnturnedUITools" Version="1.3.1" />
+    <PackageReference Include="Lib.Harmony" Version="2.2.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="RocketModFix.UnityEngine.Redist" Version="2021.3.29.1" />
+    <PackageReference Include="RocketModFix.Unturned.Redist" Version="3.23.13" />
+    <PackageReference Include="ShimmyMySherbet.MathEngine" Version="1.0.0" />
+    <PackageReference Include="System.Buffers" Version="4.5.1" />
+    <PackageReference Include="System.Memory" Version="4.5.5" />
+    <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.5.3" />
+    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
     <Reference Include="SystemEx">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Unturned\Unturned_Data\Managed\SystemEx.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.TextMeshPro, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\Unity.TextMeshPro.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\UnityEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\UnityEngine.CoreModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ImageConversionModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\UnityEngine.ImageConversionModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.IMGUIModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\UnityEngine.IMGUIModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.InputLegacyModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\UnityEngine.InputLegacyModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.InputModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\UnityEngine.InputModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\UnityEngine.PhysicsModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TextCoreFontEngineModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Unturned\Unturned_Data\Managed\UnityEngine.TextCoreFontEngineModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TextCoreModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Unturned\Unturned_Data\Managed\UnityEngine.TextCoreModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TextCoreTextEngineModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Unturned\Unturned_Data\Managed\UnityEngine.TextCoreTextEngineModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Unturned\Unturned_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UIElementsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\UnityEngine.UIElementsModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UIElementsNativeModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\UnityEngine.UIElementsNativeModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\UnityEngine.UIModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UnityWebRequestAudioModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UnityWebRequestModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\UnityEngine.UnityWebRequestModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UnityWebRequestTextureModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UnityWebRequestWWWModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEx">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Unturned\Unturned_Data\Managed\UnityEx.dll</HintPath>
-    </Reference>
-    <Reference Include="UnturnedDat, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\UnturnedDat.dll</HintPath>
-    </Reference>
-    <Reference Include="UnturnedUITools, Version=1.3.1.0, Culture=neutral, PublicKeyToken=5e66f8e265922cfe, processorArchitecture=MSIL">
-      <HintPath>..\packages\DanielWillett.UnturnedUITools.1.3.1\lib\net461\UnturnedUITools.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AssetDebugging\BarricadeClipPrefabDebug.cs" />
-    <Compile Include="AssetDebugging\ObjectClipPrefabDebug.cs" />
-    <Compile Include="AssetDebugging\IAssetDebug.cs" />
-    <Compile Include="AssetDebugging\ModelDecalableShaderDebug.cs" />
-    <Compile Include="AssetDebugging\ModelPlacementPreviewDebug.cs" />
-    <Compile Include="Assets\ICustomAsset.cs" />
-    <Compile Include="Assets\TestAsset.cs" />
-    <Compile Include="Commands\Callers\EditorCaller.cs" />
-    <Compile Include="Commands\Callers\ICaller.cs" />
-    <Compile Include="Commands\Callers\SingleplayerCaller.cs" />
-    <Compile Include="Commands\CommandHeal.cs" />
-    <Compile Include="Commands\CommandI.cs" />
-    <Compile Include="Commands\CommandMore.cs" />
-    <Compile Include="Commands\CommandRegionDebug.cs" />
-    <Compile Include="Commands\CommandTest.cs" />
-    <Compile Include="Commands\CommandV.cs" />
-    <Compile Include="Commands\ICommand.cs" />
-    <Compile Include="Commands\IEditorCommand.cs" />
-    <Compile Include="Commands\ISingleplayerCommand.cs" />
-    <Compile Include="Config.cs" />
-    <Compile Include="Main.cs" />
-    <Compile Include="Managers\AssetLoadingManager.cs" />
-    <Compile Include="Managers\AutoSaveManager.cs" />
-    <Compile Include="Managers\CommandsManager.cs" />
-    <Compile Include="Managers\ConsoleManager.cs" />
-    <Compile Include="Managers\DependentManager.cs" />
-    <Compile Include="Managers\EditorChatManager.cs" />
-    <Compile Include="Managers\LoggingManager.cs" />
-    <Compile Include="Managers\OnUpdateManager.cs" />
-    <Compile Include="Managers\OptionManager.cs" />
-    <Compile Include="Managers\PatchManager.cs" />
-    <Compile Include="Managers\PluginManager.cs" />
-    <Compile Include="Managers\RoadParallelTestManager_GOTO.cs" />
-    <Compile Include="Managers\RoadVisualsManager.cs" />
-    <Compile Include="Managers\TerrainHeightPresetManager.cs" />
-    <Compile Include="Options\IOption.cs" />
-    <Compile Include="Options\WeirdToggleOption.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SituationDependent\IConsoleDependent.cs" />
-    <Compile Include="SituationDependent\IDependent.cs" />
-    <Compile Include="SituationDependent\IEditorDependent.cs" />
-    <Compile Include="SituationDependent\IJDEDependent.cs" />
-    <Compile Include="SituationDependent\IMenuDependent.cs" />
-    <Compile Include="SituationDependent\IMultiplayerDependent.cs" />
-    <Compile Include="SituationDependent\ISingleplayerDependent.cs" />
-    <Compile Include="UI\EditorLevelObjectsUIExtension.cs" />
-    <Compile Include="UI\EditorUIExtension.cs" />
-    <Compile Include="UI\MenuConfigurationOptionsUIExtension.cs" />
-    <Compile Include="UI\MenuDashboardUIExtension.cs" />
-    <Compile Include="UI\MenuWorkshopSubmitUIExtension.cs" />
-    <Compile Include="UI\UIExtensionWrapper.cs" />
-    <Compile Include="Utils\DispatcherTool.cs" />
-    <Compile Include="Utils\EditorTerrainHeightUITool.cs" />
-    <Compile Include="Utils\HighlightingTool.cs" />
-    <Compile Include="Utils\MeasurementTool.cs" />
-    <Compile Include="Utils\ReflectionTool.cs" />
-    <Compile Include="UI\EditorCustomObjectUI.cs" />
-    <Compile Include="UI\EditorCustomTerrainHeightUI.cs" />
-    <Compile Include="UI\EditorCustomUI.cs" />
-    <Compile Include="UI\EditorCustomUIAutoSpacer.cs" />
-    <Compile Include="Utils\SleekTool.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="lib\0Harmony.dll" />
-    <Content Include="lib\Assembly-CSharp.dll" />
-    <Content Include="lib\com.rlabrecque.steamworks.net.dll" />
-    <Content Include="lib\Newtonsoft.Json.dll" />
-    <Content Include="lib\Rocket.API.dll" />
-    <Content Include="lib\Rocket.Core.dll" />
-    <Content Include="lib\Rocket.Unturned.dll" />
-    <Content Include="lib\SDG.Glazier.Runtime.dll" />
-    <Content Include="lib\SDG.HostBans.Runtime.dll" />
-    <Content Include="lib\SDG.NetPak.Runtime.dll" />
-    <Content Include="lib\SDG.NetTransport.dll" />
-    <Content Include="lib\Unity.TextMeshPro.dll" />
-    <Content Include="lib\UnityEngine.CoreModule.dll" />
-    <Content Include="lib\UnityEngine.dll" />
-    <Content Include="lib\UnityEngine.ImageConversionModule.dll" />
-    <Content Include="lib\UnityEngine.IMGUIModule.dll" />
-    <Content Include="lib\UnityEngine.InputLegacyModule.dll" />
-    <Content Include="lib\UnityEngine.InputModule.dll" />
-    <Content Include="lib\UnityEngine.PhysicsModule.dll" />
-    <Content Include="lib\UnityEngine.UI.dll" />
-    <Content Include="lib\UnityEngine.UIElementsModule.dll" />
-    <Content Include="lib\UnityEngine.UIElementsNativeModule.dll" />
-    <Content Include="lib\UnityEngine.UIModule.dll" />
-    <Content Include="lib\UnityEngine.UnityWebRequestAssetBundleModule.dll" />
-    <Content Include="lib\UnityEngine.UnityWebRequestAudioModule.dll" />
-    <Content Include="lib\UnityEngine.UnityWebRequestModule.dll" />
-    <Content Include="lib\UnityEngine.UnityWebRequestTextureModule.dll" />
-    <Content Include="lib\UnityEngine.UnityWebRequestWWWModule.dll" />
-    <Content Include="lib\UnturnedDat.dll" />
-    <Content Include="lib\UnturnedUITools.dll" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app.config" />
     <None Include="JDE2.module">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="English.dat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="packages.config" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
