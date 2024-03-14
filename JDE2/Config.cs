@@ -96,10 +96,11 @@ namespace JDE2
                 LoadWorkshop = true
             };
             CommandsConfig = new() { Enabled = true };
-            EditorConfig = new() 
+            EditorConfig = new()
             {
                 AutoSave = false,
-                RoadVisuals = true
+                RoadVisuals = true,
+                ChatHotkeys = false
             };
             PluginConfig = new() { Enabled = true };
             DeveloperConfig = new() { DebuggingEnabled = true, ConsoleEnabled = true, DisabledTypes = new[] { "JDE2.Managers.TestManager", "JDE.UI.EditorCustomTestUI" } };
@@ -122,6 +123,7 @@ namespace JDE2
     {
         public bool AutoSave { get; set; }
         public bool RoadVisuals { get; set; }
+        public bool ChatHotkeys { get; set; }
     }
 
     public class PluginConfig

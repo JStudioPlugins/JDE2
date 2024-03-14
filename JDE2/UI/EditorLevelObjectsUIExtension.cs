@@ -105,9 +105,9 @@ public class EditorLevelObjectsUIExtension : UIExtensionWrapper
         _clearObjectHighlightButton.IsVisible = false;
 
         _exitButton.IsVisible = false;
-        
 
-        HighlightingTool.CleanUp();
+
+        HighlightingTool.Get().ClearHighlights();
     }
 
     public void OpenMeasurements()

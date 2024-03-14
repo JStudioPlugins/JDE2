@@ -74,6 +74,7 @@ namespace JDE2.UI
                             _x = FocusedLevelObject.transform.position.x;
                             _y = FocusedLevelObject.transform.position.y;
                             _z = FocusedLevelObject.transform.position.z;
+                            ApplyFields();
                         }
                     }
                     else
@@ -82,6 +83,7 @@ namespace JDE2.UI
                         _x = FocusedLevelObject.transform.position.x;
                         _y = FocusedLevelObject.transform.position.y;
                         _z = FocusedLevelObject.transform.position.z;
+                        ApplyFields();
                     }
                 }
                 else if (TransformStateButton.state == 1)
@@ -94,6 +96,7 @@ namespace JDE2.UI
                             _x = FocusedLevelObject.transform.eulerAngles.x;
                             _y = FocusedLevelObject.transform.eulerAngles.y;
                             _z = FocusedLevelObject.transform.eulerAngles.z;
+                            ApplyFields();
                         }
                     }
                     else
@@ -102,6 +105,7 @@ namespace JDE2.UI
                         _x = FocusedLevelObject.transform.eulerAngles.x;
                         _y = FocusedLevelObject.transform.eulerAngles.y;
                         _z = FocusedLevelObject.transform.eulerAngles.z;
+                        ApplyFields();
                     }
                 }
                 else
@@ -114,6 +118,7 @@ namespace JDE2.UI
                             _x = FocusedLevelObject.transform.localScale.x;
                             _y = FocusedLevelObject.transform.localScale.y;
                             _z = FocusedLevelObject.transform.localScale.z;
+                            ApplyFields();
                         }
                     }
                     else
@@ -122,6 +127,7 @@ namespace JDE2.UI
                         _x = FocusedLevelObject.transform.localScale.x;
                         _y = FocusedLevelObject.transform.localScale.y;
                         _z = FocusedLevelObject.transform.localScale.z;
+                        ApplyFields();
                     }
                 }
             }
@@ -133,8 +139,9 @@ namespace JDE2.UI
                 LastPosition = new Vector3();
                 LastRotation = new Vector3();
                 LastScale = new Vector3();
+                ApplyFields();
             }
-            ApplyFields();
+            
         }
 
         private static void ApplyFields()

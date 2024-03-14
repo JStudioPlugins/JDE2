@@ -262,7 +262,7 @@ namespace JDE2.UI
             {
                 return;
             }
-            if (Event.current.isKey && Event.current.type == EventType.KeyUp)
+            if (Event.current.isKey && Event.current.type == EventType.KeyUp && Config.Instance.Data.EditorConfig.ChatHotkeys)
             {
                 if (Event.current.keyCode == KeyCode.UpArrow)
                 {

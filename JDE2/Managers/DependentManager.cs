@@ -44,8 +44,14 @@ namespace JDE2.Managers
                 try
                 {
                     if (IsTypeDisabled(type)) continue;
-                    ActiveDependents.Add((IDependent)Activator.CreateInstance(type));
-                    LoggingManager.Log($"STARTED {{{{cyan}}}}{type.FullName}{{{{_}}}}", true);
+
+                    var isMonoBehaviour = type.IsAssignableFrom(typeof(MonoBehaviour));
+                    if (isMonoBehaviour)
+                        Main.BackingObj.AddComponent(type);
+                    else
+                        ActiveDependents.Add((IDependent)Activator.CreateInstance(type));
+                    LoggingManager.Log(isMonoBehaviour ? $"STARTED MONOBEHAVIOUR {{{{cyan}}}}{type.FullName}{{{{_}}}}" 
+                        : $"STARTED {{{{cyan}}}}{type.FullName}{{{{_}}}}", true);
                 }
                 catch (Exception ex)
                 {

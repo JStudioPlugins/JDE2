@@ -11,7 +11,7 @@ using System.Drawing;
 
 namespace JDE2.Managers
 {
-    public class RoadParallelTestManager
+    /*public class RoadParallelTestManager
     {
         public RoadParallelTestManager()
         {
@@ -69,5 +69,5 @@ namespace JDE2.Managers
                 RuntimeGizmos.Get().Line(tuple.Item1, tuple.Item2, Palette.ADMIN);
             }
         }
-    }
+    }*/
 }

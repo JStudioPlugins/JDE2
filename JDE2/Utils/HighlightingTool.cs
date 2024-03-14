@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JDE2.SituationDependent;
 
 namespace JDE2.Utils
 {
@@ -18,21 +19,7 @@ namespace JDE2.Utils
 
         public ushort HighlightId;
 
-        public static HighlightingTool Get()
-        {
-            if (_instance == null)
-                _instance = Main.BackingObj.AddComponent<HighlightingTool>();
-            return _instance;
-        }
-
-        public static void CleanUp()
-        {
-            if (_instance == null)
-                return;
-            _instance.ClearHighlights();
-            Destroy(_instance);
-            _instance = null;
-        }
+        public static HighlightingTool Get() => _instance;
 
         public HighlightingTool()
         {

@@ -211,7 +211,35 @@ namespace JDE2.Utils
             return obj;
         }
 
+        public static T GetFieldValue<T>(this object? obj, string field)
+        {
+            return (T)obj.GetType().GetField(field, ReflectionFlags).GetValue(obj);
+        }
 
+        public static void SetFieldValue<T>(this object obj, string field, T value)
+        {
+            obj.GetType().GetField(field, ReflectionFlags).SetValue(obj, value);
+        }
+
+        public static Type MakeGenericType<T1>(this Type type)
+        {
+            return type.MakeGenericType(typeof(T1));
+        }
+
+        public static Type MakeGenericType<T1, T2>(this Type type)
+        {
+            return type.MakeGenericType(typeof(T1), typeof(T2));
+        }
+
+        public static Type MakeGenericType<T1, T2, T3>(this Type type)
+        {
+            return type.MakeGenericType(typeof(T1), typeof(T2), typeof(T3));
+        }
+
+        public static Type MakeGenericType<T1, T2, T3, T4>(this Type type)
+        {
+            return type.MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(T4));
+        }
     }
 }
 
